@@ -1,10 +1,25 @@
+//smart Component
 import React from 'react'
 import universal from 'react-universal-component'
 import styles from '../css/App.css'
+import Loading from './Loading'
 
+
+//1st param : component(async)
+//2nd param : options
+    // loading: LoadingComponent, -- default: a simple one is provided for you
+    // error: ErrorComponent, -- default: a simple one is provided for you
+    // resolve: () => require.resolveWeak('./Foo')
+    // path: path.join(__dirname, './Example')
+    // key: 'foo' || module => module.foo -- default: default export in ES6 and module.exports in ES5
+    // chunkName: 'myChunkName'
+    // timeout: 15000 -- default
+    // onLoad: `module => doSomething(module)
+    // minDelay: 0 -- default
 const UniversalExample = universal(() => import('./Example'), {
   resolve: () => require.resolveWeak('./Example'),
-  minDelay: 500
+  minDelay: 500,
+  loading: <Loading />
 })
 
 export default class App extends React.Component {
@@ -12,7 +27,7 @@ export default class App extends React.Component {
   // set `show` to `false` to test how asynchronously loaded chunks behave,
   // specifically how css injection is embedded in chunks + corresponding HMR
   state = {
-    show: true
+    show: false
   }
 
   componentDidMount() {
@@ -27,9 +42,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 className={styles.title}>Hello World</h1>
+        <h6 className={styles.title}>test</h6>
         {this.state.show && <UniversalExample />}
-        {!this.state.show && 'Async Component Not Requested Yet'}
+        {!this.state.show && '1. Async Component Not Requested Yet'}
       </div>
     )
   }

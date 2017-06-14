@@ -3,6 +3,6 @@ import styles from '../css/Example.css'
 
 export default () => (
   <div className={styles.paragraph}>
-    <span>3.LOADED</span>
+    <span>2.Loading</span>
   </div>
 )
