@@ -5,8 +5,11 @@ import { flushModuleIds } from 'react-universal-component/server'
 import flushChunks from 'webpack-flush-chunks'
 import App from '../src/components/App'
 
+
 export default ({ clientStats, outputPath }) => (req, res, next) => {
   const app = ReactDOM.renderToString(<App />)
+
+
   const moduleIds = flushModuleIds()
 
   const {
@@ -44,6 +47,11 @@ export default ({ clientStats, outputPath }) => (req, res, next) => {
       <html>
         <head>
           <meta charset="utf-8">
+           <meta name="viewport" content="width=device-width, initial-scale=1">
+           <link rel="manifest" href="/pwa/manifest.json">
+           <meta name="mobile-web-app-capable" content="yes">
+           <meta name="apple-mobile-web-app-capable" content="yes">
+           <meta name="theme-color" content="#536878">
           <title>react-universal-component-boilerplate</title>
           ${styles}
         </head>

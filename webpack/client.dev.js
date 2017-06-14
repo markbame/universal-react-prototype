@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin')
-
+import ServiceWorkerWebpackPlugin from 'serviceworker-webpack-plugin'
 module.exports = {
   name: 'client',
   target: 'web',
@@ -46,7 +46,9 @@ module.exports = {
       filename: '[name].js',
       minChunks: Infinity
     }),
-
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, '../pwa/service-worker.js'),
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({

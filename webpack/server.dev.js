@@ -1,7 +1,7 @@
+import ServiceWorkerWebpackPlugin from 'serviceworker-webpack-plugin'
 const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
-
 const res = p => path.resolve(__dirname, p)
 
 const modeModules = res('../node_modules')
@@ -63,11 +63,16 @@ module.exports = {
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1
     }),
-
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, '../pwa/service-worker.js'),
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development')
       }
     })
-  ]
+  ],
+  node: {
+    process: false
+  }
 }
